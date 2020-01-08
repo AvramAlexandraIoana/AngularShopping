@@ -17,3 +17,7 @@ button[type=submit].btn{
     background-color: #04c582;
     color: #fff;
 }
+.card {
+    margin-left: 25%;
+    margin-top: 10%;
+}
