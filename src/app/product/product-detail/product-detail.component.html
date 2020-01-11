@@ -1,0 +1,61 @@
+<div  *ngFor="let productS of product let i=index">
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="product-image">
+          <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+            <img [src]="productS.imageUrl" [alt]="productS.name" width="100%" class="img-fluid rounded">
+          </div>
+          <div class="" style="margin-top:15px">
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Product Price</h6>
+                </div>
+                
+                <span class="text-muted" style="color:crimson !important">$ {{productS.price}}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Product Seller</h6>
+                </div>
+                <span class="text-muted" style="color:crimson !important">{{productS.productSeller}}</span>
+              </li>
+            </ul>
+            <button class="btn btn-primary" (click)="addToCart(products)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="product-detail">
+          <h5 class="product-head">Product Details</h5>
+          <table class="table" cellspacing="0" style="max-height: 28px">
+            <tbody>
+              <tr>
+                <th scope="row">Product Name</th>
+                <td>{{productS.name}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Product Description</th>
+                <td>{{productS.description}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Product Category</th>
+                <td>{{productS.category}}</td>
+              </tr>
+              <tr>
+                <th scope="row">No. of quantity available</th>
+                <td>{{productS.productQuantity}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Product Added on</th>
+                <td>{{productS.productAdded| date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

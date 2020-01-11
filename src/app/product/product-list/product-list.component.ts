@@ -10,12 +10,14 @@ export class ProductListComponent implements OnInit {
 
   products: any[];
   baseUrl: string;
+  brands: any[];
   constructor(private service: MainService) { }
 
   ngOnInit() {
     console.log("Ioana");
     this.baseUrl = "https://shoppingcartangular-6b27c.firebaseio.com/products.json";
     this.products = this.getProducts();
+    this.brands = ["Stradivarius", "Bershka"];
     console.log(this.products);
 
   }
@@ -23,6 +25,6 @@ export class ProductListComponent implements OnInit {
   getProducts()  {
     return this.service.get(this.baseUrl);
   }
-
+ 
 
 }

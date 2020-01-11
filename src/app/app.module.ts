@@ -15,10 +15,11 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from "../environments/environment";
-import { ImageComponent } from './images/image/image.component';
-import { ImageListComponent } from './images/image-list/image-list.component';
 import { ProductNewComponent } from './product/product-new/product-new.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
+import {MatGridListModule ,MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,MatSortModule,MatTableModule,MatIconModule,MatButtonModule,MatCardModule,MatFormFieldModule } from "@angular/material";
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,9 @@ import { ProductListComponent } from './product/product-list/product-list.compon
     RegisterComponent,
     HomeComponent,
     NavMenuComponent,
-    ImageComponent,
-    ImageListComponent,
     ProductNewComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductDetailComponent
     ],
   imports: [
     BrowserModule,
@@ -45,6 +45,17 @@ import { ProductListComponent } from './product/product-list/product-list.compon
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatGridListModule ,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

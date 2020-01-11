@@ -1,1 +1,96 @@
-<p>product-list works!</p>
+<div class="container">
+  <!-- <div class="row" *ngIf="authService.isAdmin()">
+    <div class="col-sm">
+      <div class="float-right">
+        <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#exampleModalLong">
+          Add Product
+        </button>
+      </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="brand_select">By Brands:</label>
+        <select class="form-control" name="" id="brand_select" [(ngModel)]="selectedBrand">
+          <option *ngFor="let brand of brands" [ngValue]="brand">{{brand}}</option>
+        </select>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">Google</li>
+        <li class="list-group-item">Apple</li>
+        <li class="list-group-item">Guess</li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+
+      <div class="container">
+        <div class="row" *ngIf="!loading">
+          <!-- List of Products -->
+          <div class="col-sm-4 mb-2" *ngFor="let product of products let i=index">
+            <div class="item">
+              <div class=" mb-r">
+                <!--Card-->
+                <div class="card card-cascade wider">
+                  <!--Card image-->
+                  <a [routerLink]="['/product', i]">
+                    <div class="view overlay hm-white-slight">
+                      <img [src]="product.imageUrl" class="img-fluid" alt="" width="360px" height="640px">
+                      <a>
+                        <div class="mask waves-effect waves-light" mdbRippleRadius></div>
+                      </a>
+                    </div>
+                  </a>
+                  <!--/.Card image-->
+                  <!--Card content-->
+                  <div class="card-body text-center no-padding">
+                    <!--Category & Title-->
+                    <a class="text-muted">
+                      <h5>{{ product.category }}</h5>
+                    </a>
+                    <p class="card-title">
+                      <strong>
+                        <a [routerLink]="['/product',i]" routerLinkActive="router-link-active">{{
+                          product.name }}</a>
+                      </strong>
+                    </p>
+                    <!--Description-->
+                    <p class="card-text">{{ product.description }}
+                    </p>
+                    <!--Card footer-->
+                    <div class="card-footer">
+                      <span class="left">EUR {{ product.price }}</span>
+                      <span class="right">
+                        <a placement="top" mdbTooltip="Add to Wishlist" container="body" (click)="addFavourite(product)">
+                          <i class="fa fa-heart"></i>
+                        </a>
+                        <a placement="top" mdbTooltip="Add to Cart" container="body" (click)="addToCart(product)">
+                          <i class="fa fa-shopping-cart"></i>
+                        </a>
+                        <!-- <a placement="top" mdbTooltip="Remove Product" container="body" 
+                          (click)="removeProduct(product.$key)">
+                          <i class="fa fa-trash"></i>
+                        </a> -->
+                      </span>
+                    </div>
+
+                  </div>
+                  <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Pagination -->
+        <!-- <div class="text-center mt-3">
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div> -->
+      </div>
+      <!--/.Card-->
+    </div>
+  </div>
+</div>
+

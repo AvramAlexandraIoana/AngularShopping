@@ -5,6 +5,9 @@ import { finalize } from "rxjs/operators";
 import { ImageService } from 'src/app/shared/image.service';
 import { MainService } from 'src/app/services/main.service';
 
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
+
 @Component({
   selector: 'app-product-new',
   templateUrl: './product-new.component.html',
@@ -23,9 +26,14 @@ export class ProductNewComponent implements OnInit {
 
   ngOnInit() {
     this.productForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
       category: ['', [Validators.required]],
-      imageUrl: ['', [Validators.required]]
+      imageUrl: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      productQuantity: ['',[Validators.required]],
+      productSeller: ['', [Validators.required]],
+      productAdded: moment()
     });
     this.baseUrl = "https://shoppingcartangular-6b27c.firebaseio.com/products.json";
     this.resetForm();
@@ -52,6 +60,7 @@ export class ProductNewComponent implements OnInit {
       this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
+            formValue['productAdded'] = moment();
             formValue['imageUrl'] = url;
             console.log(formValue);
             this.service.post(this.baseUrl,formValue);
@@ -71,9 +80,14 @@ export class ProductNewComponent implements OnInit {
   resetForm() {
     this.productForm.reset();
     this.productForm.setValue({
+      name: '',
       description: '',
       imageUrl: '',
-      category: 'Dress'
+      category: 'Dress',
+      price: '',
+      productQuantity: '',
+      productSeller: '',
+      productAdded: moment()
     });
     this.imgSrc = './assets/images/CL0070655ML.jpg';
     this.selectedImage = null;

@@ -44,7 +44,32 @@ export class MainService {
     return postsArray;
   }
 
-  
+  getById(url: string, id: number) {
+      const productArray = [];
+      var count = 0;
+      this.http
+      .get(url)
+      .pipe(
+        map(responseData => {
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key) && count == id) {
+              console.log(key);
+              productArray.push({ ...responseData[key], id: key });
+            }
+            count += 1;
+          }
+          return productArray;
+        })
+      )
+      .subscribe(product => {
+        // ...
+        console.log(product);
+        return product;
+      });
+      console.log(productArray);
+
+      return productArray;
+  }
 
   
 }
