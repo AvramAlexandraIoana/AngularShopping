@@ -73,6 +73,30 @@ export class MainService {
 
       return productArray;
   }
+  getNumberOfFavorite(url: string) {
+    var count = 0;
+    this.http
+    .get(url)
+    .pipe(
+      map(responseData => {
+        for (const key in responseData) {
+          if (responseData.hasOwnProperty(key) && responseData[key].isFavorite) {
+            count += 1;
+            // productArray.push({ ...responseData[key], id: key });
+          }
+        }
+        return count;
+      })
+    )
+    .subscribe(count => {
+      // ...
+      console.log(count);
+      return count;
+    });
+    console.log(count);
+
+    return count;
+}
 
  
   delete(url : string) {

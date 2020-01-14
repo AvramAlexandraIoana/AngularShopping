@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   isValidUser = false;
   baseUrl : string
   constructor(private formBuilder: FormBuilder, private request: MainService, private router: Router, private navbar : NavMenuComponent, private toastr: ToastrService) {
+    this.ngOnInit();
   }
 
   ngOnInit() {

@@ -2,6 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { MainService } from 'src/app/services/main.service';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product';
+import { NavMenuComponent } from 'src/app/nav-menu/nav-menu.component';
 
 @Injectable({
   providedIn: 'root'  // <- ADD THIS
@@ -19,17 +20,16 @@ export class ProductListComponent implements OnInit {
   baseUrl: string;
   brands = ["Stradivarius", "Bershka", "Zara"];
   dbPath: string;
-  constructor(private service: MainService,  private toastr: ToastrService) { }
+  navbarFavProdCount: number;
+  
+  constructor(private service: MainService,  private toastr: ToastrService, private menu: NavMenuComponent) { }
 
   ngOnInit() {
+    this.navbarFavProdCount = 0;
     this.dbPath = '/products';
     this.baseUrl = "https://shoppingcartangular-6b27c.firebaseio.com/products.json";
     this.products = this.getProducts();
     this.filterProduct = this.getProducts();
-    console.log(this.filterProduct);
-    this.numberOfFavorites();
-
-
   }
 
   getProducts()  {
@@ -57,7 +57,9 @@ export class ProductListComponent implements OnInit {
       .update(key, { isFavorite: true }, this.dbPath)
       .catch(err => console.log(err));
     this.products[index].isFavorite = true;
-    console.log(this.products);
+    this.navbarFavProdCount += 1;
+    this.menu.setNumberOfFavorites(this.navbarFavProdCount);
+
   }
   
 
@@ -78,10 +80,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  numberOfFavorites() {
-    console.log("Ioana");
-    console.log(this.filterProduct.filter((item) => item.productSeller == 'Zara'));
-    return this.filterProduct.filter((item) => item.isFavorite == false);
-  }
+ 
 
 }
