@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { Product } from '../models/product';
+import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
 
-
-  constructor(private http: HttpClient) { }
-
+  constructor(private db: AngularFireDatabase, private http: HttpClient) {
+  }
+    
   post(url : string, data : any) {
     this.http
         .post(
@@ -69,6 +72,34 @@ export class MainService {
       console.log(productArray);
 
       return productArray;
+  }
+
+ 
+  delete(url : string) {
+    return this.http
+      .delete(url, {
+        observe: 'events',
+        responseType: 'text'
+      })
+      .pipe(
+        tap(event => {
+          console.log(event);
+          if (event.type === HttpEventType.Sent) {
+            // ...
+          }
+          if (event.type === HttpEventType.Response) {
+            console.log(event.body);
+          }
+        })
+      );
+  }
+
+  update(key: string, value: any, dbPath: string): Promise<void> {
+    return this.db.list(dbPath).update(key, value);
+  }
+  deleteOneRow(key : string, dbPath: string): Promise<void> {
+    console.log(key);
+    return this.db.list(dbPath).remove(key);
   }
 
   

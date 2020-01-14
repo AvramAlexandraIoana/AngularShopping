@@ -20,6 +20,8 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import {MatGridListModule ,MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,MatSortModule,MatTableModule,MatIconModule,MatButtonModule,MatCardModule,MatFormFieldModule } from "@angular/material";
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
+import { MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -41,12 +43,14 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
     ToastrModule.forRoot({
       progressBar: true
     }),
+    TooltipModule.forRoot(),
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     MatInputModule,
     MatTableModule,
+    MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,

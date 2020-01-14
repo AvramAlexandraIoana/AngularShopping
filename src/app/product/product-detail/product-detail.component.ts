@@ -14,9 +14,7 @@ import { StickyDirection } from '@angular/cdk/table';
 })
 export class ProductDetailComponent implements OnInit {
 
-  sub: any;
   product: object;
-  products: any;
   id: number;
   baseUrl: string;
 
@@ -35,7 +33,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getProducts()  {
-    return this.service.get("https://shoppingcartangular-6b27c.firebaseio.com/products.json");
+    return this.service.get(this.baseUrl);
   }
 
 }

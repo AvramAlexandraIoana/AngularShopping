@@ -1,26 +1,24 @@
 <div class="container">
-  <!-- <div class="row" *ngIf="authService.isAdmin()">
-    <div class="col-sm">
-      <div class="float-right">
-        <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#exampleModalLong">
-          Add Product
-        </button>
-      </div>
-    </div>
-  </div> -->
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
         <label for="brand_select">By Brands:</label>
-        <select class="form-control" name="" id="brand_select" [(ngModel)]="selectedBrand">
-          <option *ngFor="let brand of brands" [ngValue]="brand">{{brand}}</option>
+        <select class="form-control" name="" id="brand_select" [(ngModel)]="selectedBrand" (change)="filterProducts($event.target.value)">
+          <option value="0">--All--</option>
+          <option *ngFor="let brand of brands" value="{{brand}}">{{brand}}</option>
         </select>
       </div>
       <ul class="list-group">
-        <li class="list-group-item">Google</li>
-        <li class="list-group-item">Apple</li>
+        <li class="list-group-item">Stradivarius</li>
+        <li class="list-group-item">Zara</li>
         <li class="list-group-item">Guess</li>
       </ul>
+      <br />
+      <button class="btn btn-danger mr-1 " (click)="removeAllProduct()">Delete all products </button>
+      <br />
+      <br />
+      <button class="btn btn-primary mr-1" [routerLink]="['/product']">Add new product </button>
+
     </div>
     <div class="col-md-9">
 
@@ -61,16 +59,16 @@
                     <div class="card-footer">
                       <span class="left">EUR {{ product.price }}</span>
                       <span class="right">
-                        <a placement="top" mdbTooltip="Add to Wishlist" container="body" (click)="addFavourite(product)">
+                        <a placement="top" mdbTooltip="Add to Wishlist" container="body" (click)="addFavourite(product.id, i)">
                           <i class="fa fa-heart"></i>
                         </a>
-                        <a placement="top" mdbTooltip="Add to Cart" container="body" (click)="addToCart(product)">
+                        <a placement="top" mdbTooltip="Add to Cart" container="body" (click)="addToCart(product.id, i)">
                           <i class="fa fa-shopping-cart"></i>
                         </a>
-                        <!-- <a placement="top" mdbTooltip="Remove Product" container="body" 
-                          (click)="removeProduct(product.$key)">
+                        <a placement="top" mdbTooltip="Remove Product" container="body" 
+                          (click)="removeProduct(product.id, i)">
                           <i class="fa fa-trash"></i>
-                        </a> -->
+                        </a>
                       </span>
                     </div>
 

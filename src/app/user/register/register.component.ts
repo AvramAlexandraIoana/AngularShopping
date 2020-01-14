@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   loadedUsers = [];
+  baseUrl : string;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private request: MainService, private http: HttpClient, private toastr: ToastrService) {}
 
@@ -30,22 +31,21 @@ export class RegisterComponent implements OnInit {
     }, {
         validator: MustMatch('password', 'confirmPassword')
     });
+    this.baseUrl = "https://shoppingcartangular-6b27c.firebaseio.com/users.json";
   }
 
 
 
   register(userData: { name: string; email: string , password: string, confirmPassword: string}) {
-    // Send Http request
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
         return;
     }
     this.toastr.success('New user created!', 'Registration successful.');
 
-    this.request.post( 
-      'https://shoppingcartangular-6b27c.firebaseio.com/users.json',
+    this.request.post(
+        this.baseUrl,
         userData
     );
     this.router.navigate(["login"]);

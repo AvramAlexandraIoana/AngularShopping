@@ -33,7 +33,9 @@ export class ProductNewComponent implements OnInit {
       price: ['', [Validators.required]],
       productQuantity: ['',[Validators.required]],
       productSeller: ['', [Validators.required]],
-      productAdded: moment()
+      productAdded: moment(),
+      isFavorite: false,
+      isAddedToCard: false
     });
     this.baseUrl = "https://shoppingcartangular-6b27c.firebaseio.com/products.json";
     this.resetForm();
@@ -87,7 +89,9 @@ export class ProductNewComponent implements OnInit {
       price: '',
       productQuantity: '',
       productSeller: '',
-      productAdded: moment()
+      productAdded: moment(),
+      isFavorite: false,
+      isAddedToCard: false
     });
     this.imgSrc = './assets/images/CL0070655ML.jpg';
     this.selectedImage = null;
